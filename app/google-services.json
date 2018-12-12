@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1087971200522",
+    "firebase_url": "https://admob-app-id-7542112563.firebaseio.com",
+    "project_id": "admob-app-id-7542112563",
+    "storage_bucket": "admob-app-id-7542112563.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087971200522:android:b95b73caad895680",
+        "android_client_info": {
+          "package_name": "com.ahmednmahran.egoshopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087971200522-mgqafrvt84hrf625smjk76uq1m9f3vjs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahmednmahran.egoshopping",
+            "certificate_hash": "c2f2248ed6a1fe5053b5a5ae45ea211d0807183b"
+          }
+        },
+        {
+          "client_id": "1087971200522-o09t5n1toh439hv0mi9gnhb60433oa43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyTmXli2WAKjk0Et60qSahqzOgHVA58is"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087971200522-o09t5n1toh439hv0mi9gnhb60433oa43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
