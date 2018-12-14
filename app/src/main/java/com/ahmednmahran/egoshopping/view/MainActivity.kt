@@ -8,13 +8,10 @@ import com.ahmednmahran.egoshopping.R
 import com.google.firebase.auth.FirebaseAuth
 import com.firebase.ui.auth.AuthUI
 import java.util.*
-import java.util.Arrays.asList
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import android.content.Intent
-import android.support.v4.app.FragmentActivity
 import android.util.Log
-import android.widget.Toast
 import org.jetbrains.anko.toast
 
 
@@ -26,6 +23,8 @@ class MainActivity : AppCompatActivity() {
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
             // already signed in
+            openHome(null)
+
         } else {
             // not signed in
             startActivityForResult(
@@ -52,11 +51,7 @@ class MainActivity : AppCompatActivity() {
 
             // Successfully signed in
             if (resultCode == Activity.RESULT_OK) {
-//                startActivity(createIntent(this, response))
-                var intent = Intent(this@MainActivity, SignedInActivity::class.java)
-                intent.putExtra("response",response)
-                startActivity(intent)
-                finish()
+                openHome(response)
             } else {
                 // Sign in failed
                 if (response == null) {
@@ -75,5 +70,12 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", "Sign-in error: ", response.error)
             }
         }
+    }
+
+    private fun openHome(response: IdpResponse?) {
+        var intent = Intent(this@MainActivity, HomeActivity::class.java)
+        intent.putExtra("response", response)
+        startActivity(intent)
+        finish()
     }
 }
