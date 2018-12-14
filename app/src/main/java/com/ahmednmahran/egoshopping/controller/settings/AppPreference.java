@@ -2,6 +2,7 @@ package com.ahmednmahran.egoshopping.controller.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.google.gson.Gson;
 
 /**
  * Created by Ahmed Nabil on 12/14/18.
@@ -26,6 +27,14 @@ public class AppPreference {
             instance = new AppPreference();
         }
         return instance;
+    }
+
+    public void save(Object object){
+        editor.putString(object.getClass().getSimpleName(),new Gson().toJson(object.toString())).commit();
+    }
+
+    public String getString(Object object){
+        return settings.getString(object.getClass().getSimpleName(),null);
     }
 
 }
