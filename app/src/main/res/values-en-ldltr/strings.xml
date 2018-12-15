@@ -5,4 +5,9 @@
     <string name="title_map">Map</string>
     <string name="title_checkout">Checkout</string>
     <string name="title_activity_maps">Map</string>
+    <string name="service_not_available">Service currently not available</string>
+    <string name="invalid_lat_long_used">Invalid longitude or latitude</string>
+    <string name="no_address_found">Address not found</string>
+    <string name="address_found">Address found</string>
+    <string name="no_geocoder_available">No geocoder available</string>
 </resources>

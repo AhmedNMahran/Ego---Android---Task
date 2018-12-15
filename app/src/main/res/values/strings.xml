@@ -5,4 +5,9 @@
     <string name="title_map">الخريطة</string>
     <string name="title_checkout">تأكيد الدفع</string>
     <string name="title_activity_maps">الخريطة</string>
+    <string name="service_not_available">الخدمة غير متوفرة حاليًّا</string>
+    <string name="invalid_lat_long_used">خط الطول أو العرض غير صحيح</string>
+    <string name="no_address_found">لم نعثر على عنوان</string>
+    <string name="address_found">تم العثور على العنوان</string>
+    <string name="no_geocoder_available">No geocoder available</string>
 </resources>
