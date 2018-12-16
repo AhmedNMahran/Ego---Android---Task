@@ -72,12 +72,17 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentServices") {
             val address = addresses[0]
             // Fetch the address lines using getAddressLine,
             // join them, and send them to the thread.
+            val cityName = address.locality
             val addressFragments = with(address) {
                 (0..maxAddressLineIndex).map { getAddressLine(it) }
             }
             Log.i(TAG, getString(R.string.address_found))
-            deliverResultToReceiver(Constants.SUCCESS_RESULT,
-                addressFragments.joinToString(separator = "\n"))
+            if(!cityName.isNullOrBlank() && !cityName.contains(getString(R.string.cityName),true)){
+                deliverResultToReceiver(Constants.FAILURE_RESULT,getString(R.string.area_not_covered))
+            }else{
+                deliverResultToReceiver(Constants.SUCCESS_RESULT,
+                    addressFragments.joinToString(separator = "\n"))
+            }
         }
     }
 

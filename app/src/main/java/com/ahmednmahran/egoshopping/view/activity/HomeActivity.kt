@@ -80,12 +80,13 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback, AddressResultRecei
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.setMaxZoomPreference(17f)
         // Add a marker in Sydney and move the camera
         val store = savedProduct.store.geolocation
         mMap.addMarker(MarkerOptions().position(store).title(savedProduct.store.name))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(store))
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(store))
         mMap.setOnMapClickListener {
-
             mMap.clear()
             mMap.addMarker(MarkerOptions().position(it))
             lastKnownLocation?.latitude = it.latitude

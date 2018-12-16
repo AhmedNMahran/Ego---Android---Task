@@ -10,4 +10,9 @@
     <string name="no_address_found">لم نعثر على عنوان</string>
     <string name="address_found">تم العثور على العنوان</string>
     <string name="no_geocoder_available">No geocoder available</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="cityName">جدة</string>
+    <string name="area_not_covered">المنطقة غير مغطاة!</string>
 </resources>
