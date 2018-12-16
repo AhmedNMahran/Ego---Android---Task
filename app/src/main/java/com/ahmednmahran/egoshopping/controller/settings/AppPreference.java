@@ -10,6 +10,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -65,7 +67,7 @@ public class AppPreference {
 
     public Product getSavedProduct(){
         String savedProduct = settings.getString("savedProduct", "");
-        Product product = new Product("المنتج العجيب",120,getSavedStore(),30);
+        Product product = new Product("المنتج العجيب",120,getSavedStore(),30,Calendar.getInstance());
         if(!savedProduct.isEmpty()){
             try{
                 product = gson.fromJson(savedProduct,Product.class);
@@ -94,7 +96,7 @@ public class AppPreference {
         return this;
     }
 
-    public AppPreference saveUser(User user){
+    public AppPreference updateUser(User user){
         editor.putString("savedUser",gson.toJson(user));
         return this;
     }

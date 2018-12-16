@@ -25,21 +25,21 @@
                 android:name=".controller.location.FetchAddressIntentService"
                 android:exported="false"/>
 
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.SignedInActivity"/>
+        <activity android:name=".view.activity.SignedInActivity"/>
         <activity
-                android:name=".view.HomeActivity"
+                android:name=".view.activity.HomeActivity"
                 android:label="@string/title_activity_home"
-                android:parentActivityName=".view.MainActivity">
+                android:parentActivityName=".view.activity.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.ahmednmahran.egoshopping.view.MainActivity"/>
+                    android:value="com.ahmednmahran.egoshopping.view.activity.MainActivity"/>
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

@@ -1,6 +1,7 @@
 package com.ahmednmahran.egoshopping.model
 
 import com.google.android.gms.maps.model.LatLng
+import java.util.*
 
 /**
  * Created by Ahmed Nabil on 12/14/18.
@@ -13,7 +14,7 @@ data class User(var name: String, var age: Double, var addressDescription: Strin
 /**
  * The item being selected by {@User}
  */
-data class Product(var name: String, var price: Double, var store: Store, var deliveryCost: Double)
+data class Product(var name: String, var price: Double, var store: Store, var deliveryCost: Double, var deliveryDate: Calendar)
 
 /**
  * The Store from which the user buys the products

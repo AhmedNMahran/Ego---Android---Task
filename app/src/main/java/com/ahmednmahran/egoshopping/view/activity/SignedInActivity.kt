@@ -1,4 +1,4 @@
-package com.ahmednmahran.egoshopping.view
+package com.ahmednmahran.egoshopping.view.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
