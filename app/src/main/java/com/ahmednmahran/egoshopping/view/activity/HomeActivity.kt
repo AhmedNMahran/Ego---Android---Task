@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.ahmednmahran.egoshopping.R
-import com.ahmednmahran.egoshopping.view.fragment.MapFragment
+import com.ahmednmahran.egoshopping.controller.navigation.loadCheckout
+import com.ahmednmahran.egoshopping.controller.navigation.loadMap
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity(){
-
+class HomeActivity : AppCompatActivity() {
 
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -18,10 +18,11 @@ class HomeActivity : AppCompatActivity(){
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_map -> {
-                loadMap()
+                loadMap(this)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_checkout -> {
+                loadCheckout(this)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -33,14 +34,6 @@ class HomeActivity : AppCompatActivity(){
         setContentView(R.layout.activity_home)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-    }
-
-    private fun loadMap(){
-        val mapFragment = MapFragment.newInstance("", "")
-        val fragment = supportFragmentManager.findFragmentByTag("MapFragment")
-        if(fragment != null)
-            supportFragmentManager.beginTransaction().remove(fragment)
-        supportFragmentManager.beginTransaction().add(R.id.homeContainer, mapFragment,"MapFragment").commit()
     }
 
 }

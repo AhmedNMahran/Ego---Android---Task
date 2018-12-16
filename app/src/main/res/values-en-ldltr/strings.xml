@@ -14,4 +14,5 @@
     <string name="area_not_covered">Area not covered!</string>
     <string name="address_description">Address description</string>
     <string name="update_address">Update Address</string>
+    <string name="checkout">Checkout</string>
 </resources>

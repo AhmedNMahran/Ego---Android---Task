@@ -17,4 +17,5 @@
     <string name="area_not_covered">المنطقة غير مغطاة!</string>
     <string name="address_description">وصف العنوان</string>
     <string name="update_address">تحديث العنوان</string>
+    <string name="checkout">تأكيد الطلب</string>
 </resources>

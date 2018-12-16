@@ -24,7 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class CheckoutFragmentFragment : Fragment() {
+class CheckoutFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -51,19 +51,19 @@ class CheckoutFragmentFragment : Fragment() {
         listener?.onFragmentInteraction(uri)
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        if (context is OnFragmentInteractionListener) {
+//            listener = context
+//        } else {
+//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+//        }
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        listener = null
+//    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -93,7 +93,7 @@ class CheckoutFragmentFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            CheckoutFragmentFragment().apply {
+            CheckoutFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
