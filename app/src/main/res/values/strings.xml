@@ -15,4 +15,6 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="cityName">جدة</string>
     <string name="area_not_covered">المنطقة غير مغطاة!</string>
+    <string name="address_description">وصف العنوان</string>
+    <string name="update_address">تحديث العنوان</string>
 </resources>

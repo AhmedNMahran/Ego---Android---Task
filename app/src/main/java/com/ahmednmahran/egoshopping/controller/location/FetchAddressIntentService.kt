@@ -10,14 +10,12 @@ import android.os.ResultReceiver
 import android.util.Log
 import com.ahmednmahran.egoshopping.R
 import com.ahmednmahran.egoshopping.controller.settings.AppPreference
-import com.google.android.gms.maps.model.LatLng
 import java.io.IOException
 
 
 /**
  * An [IntentService] subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
 class FetchAddressIntentService : IntentService("FetchAddressIntentServices") {
