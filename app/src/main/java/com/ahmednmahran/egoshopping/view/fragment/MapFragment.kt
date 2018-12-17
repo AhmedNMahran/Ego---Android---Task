@@ -2,7 +2,6 @@ package com.ahmednmahran.egoshopping.view.fragment
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.location.Location
 import android.net.Uri
@@ -30,7 +29,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import android.os.Handler
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick

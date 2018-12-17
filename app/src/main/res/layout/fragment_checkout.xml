@@ -3,20 +3,26 @@
              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".view.fragment.CheckoutFragmentFragment">
+             tools:context=".view.fragment.CheckoutFragment"
+             >
     <LinearLayout
             android:layout_margin="8dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1"
-    >
+            android:weightSum="1">
         <FrameLayout
                 android:id="@+id/upSellingContainer"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.25"
-                android:background="@color/colorAccent">
+                >
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvApps"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/item_upselling"
+                    android:layout_height="wrap_content" />
         </FrameLayout>
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"

@@ -18,4 +18,6 @@
     <string name="address_description">وصف العنوان</string>
     <string name="update_address">تحديث العنوان</string>
     <string name="checkout">تأكيد الطلب</string>
+    <string name="delivery_fees">رسوم التوصيل</string>
+    <string name="riyal">ريال</string>
 </resources>

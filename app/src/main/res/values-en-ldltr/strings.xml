@@ -15,4 +15,6 @@
     <string name="address_description">Address description</string>
     <string name="update_address">Update Address</string>
     <string name="checkout">Checkout</string>
+    <string name="delivery_fees">Delivery Fees</string>
+    <string name="riyal">SR</string>
 </resources>
