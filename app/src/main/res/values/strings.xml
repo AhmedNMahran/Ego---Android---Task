@@ -1,32 +1,29 @@
 <resources>
-    <string name="app_name">إيجو تسوق</string>
-    <string name="title_activity_home">الشاشة الرئيسية</string>
-    <string name="title_home">الرئيسية</string>
-    <string name="title_map">الخريطة</string>
-    <string name="title_checkout">تأكيد الدفع</string>
-    <string name="title_activity_maps">الخريطة</string>
-    <string name="service_not_available">الخدمة غير متوفرة حاليًّا</string>
-    <string name="invalid_lat_long_used">خط الطول أو العرض غير صحيح</string>
-    <string name="no_address_found">لم نعثر على عنوان</string>
-    <string name="address_found">تم العثور على العنوان</string>
+    <string name="app_name">Ego Shopping</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_map">Map</string>
+    <string name="title_checkout">Checkout</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="service_not_available">Service currently not available</string>
+    <string name="invalid_lat_long_used">Invalid longitude or latitude</string>
+    <string name="no_address_found">Address not found</string>
+    <string name="address_found">Address found</string>
     <string name="no_geocoder_available">No geocoder available</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="cityName">جدة</string>
-    <string name="area_not_covered">المنطقة غير مغطاة!</string>
-    <string name="address_description">وصف العنوان</string>
-    <string name="update_address">تحديث العنوان</string>
-    <string name="checkout">تأكيد الطلب</string>
-    <string name="delivery_fees">رسوم التوصيل</string>
-    <string name="riyal">ريال</string>
-    <string name="order_summery">بيانات المستخدم\n%1$s\nتفاصيل المنتج\n%2$s\nالإجمالي\n%3$s</string>
-    <string name="age">العمر</string>
-    <string name="address">العنوان</string>
-    <string name="name">الاسم</string>
-    <string name="price">السعر</string>
-    <string name="delivery_date">ميعاد التوصيل</string>
-    <string name="data_updated">تم تحديث البيانات بنجاح</string>
-    <string name="free_delivery">توصيل مجاني</string>
-    <string name="upselling">منتج إضافي %1$s</string>
+    <string name="cityName">Jeddah</string>
+    <string name="area_not_covered">Area not covered!</string>
+    <string name="address_description">Address description</string>
+    <string name="update_address">Update Address</string>
+    <string name="checkout">Checkout</string>
+    <string name="delivery_fees">Delivery Fees</string>
+    <string name="riyal">SR</string>
+    <string name="order_summery">User Details\n%1$s\nProduct Details\n%2$s\nGrand Total\n%3$s</string>
+    <string name="age">Age</string>
+    <string name="address">Address</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="data_updated">Data updated successfully</string>
+    <string name="free_delivery">Free Delivery</string>
+    <string name="upselling">Up Selling Product %1$s</string>
 </resources>
