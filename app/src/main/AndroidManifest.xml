@@ -3,13 +3,12 @@
           package="com.ahmednmahran.egoshopping">
 
     <uses-permission android:name="android.permission.INTERNET "/>
-
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-
     <application
             android:name=".controller.settings.EgoApplication"
             android:allowBackup="true"
@@ -19,7 +18,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <!--         This IntentService is used to get address from location -->
+        <!-- This IntentService is used to get address from location -->
         <service
                 android:name=".controller.location.FetchAddressIntentService"
                 android:exported="false"/>
@@ -51,7 +50,6 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
-
     </application>
 
 </manifest>

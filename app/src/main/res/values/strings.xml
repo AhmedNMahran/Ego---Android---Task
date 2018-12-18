@@ -30,4 +30,9 @@
     <string name="card_info">Payment Info</string>
     <string name="user_info">User Info</string>
     <string name="update_card">Update Payment Method</string>
+    <string name="payment_successful">Payment Successful</string>
+    <string name="add_payment_method_message">Add payment method to proceed</string>
+    <string name="no_payment_selected">No Payment Selected</string>
+    <string name="channel_name" translatable="false">Ego Notification</string>
+    <string name="channel_description" translatable="false">Get All App Notifications</string>
 </resources>

@@ -29,4 +29,7 @@
     <string name="card_info">بيانات الدفع</string>
     <string name="user_info">بيانات المستخدم</string>
     <string name="update_card">تحديث طريقة الدفع</string>
+    <string name="payment_successful">تم الشراء بنجاح</string>
+    <string name="add_payment_method_message">أضف طريقة دفع أولًا</string>
+    <string name="no_payment_selected">لم تحدد طريقة الدفع</string>
 </resources>

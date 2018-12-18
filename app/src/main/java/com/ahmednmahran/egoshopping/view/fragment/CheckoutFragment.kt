@@ -1,44 +1,53 @@
 package com.ahmednmahran.egoshopping.view.fragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import com.ahmednmahran.egoshopping.R
+import com.ahmednmahran.egoshopping.controller.notification.NotificationManager
 import com.ahmednmahran.egoshopping.controller.adapter.OnAppSelectedListener
 import com.ahmednmahran.egoshopping.controller.adapter.UpSellingAdapter
+import com.ahmednmahran.egoshopping.controller.navigation.loadPayment
 import com.ahmednmahran.egoshopping.controller.networking.ApiFacade
 import com.ahmednmahran.egoshopping.controller.networking.Callback
+import com.ahmednmahran.egoshopping.controller.payment.Payment
 import com.ahmednmahran.egoshopping.controller.settings.AppPreference
 import com.ahmednmahran.egoshopping.model.App
 import kotlinx.android.synthetic.main.fragment_checkout.*
 import kotlinx.android.synthetic.main.fragment_checkout.view.*
+import org.jetbrains.anko.okButton
+import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.toast
 import java.text.SimpleDateFormat
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [CheckoutFragmentFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [CheckoutFragmentFragment.newInstance] factory method to
+ * Use the [CheckoutFragment.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppSelectedListener {
+class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppSelectedListener,
+    Payment.PaymentCallback {
+    override fun onPaymentSuccessful(message: String) {
+        NotificationManager.sendNotification(context!!,getString(R.string.payment_successful),getString(R.string.price)+": "+message+" "+getString(R.string.riyal))
+    }
+
+    override fun onPaymentFailure() {
+
+    }
+
+    private lateinit var appPreference: AppPreference
+
     override fun onItemSelected(app: App?) {
         AppPreference.getInstance().saveSelectedUpSelling(app)
         updateOrder()
-
     }
 
     override fun onSuccess(returnedData: List<App>?) {
@@ -49,19 +58,12 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
         toast("$message")
     }
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
     private lateinit var simpleDateFormat: SimpleDateFormat
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         simpleDateFormat = SimpleDateFormat("DD-MM-YY HH:MM a")
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        appPreference = AppPreference.getInstance()
     }
 
     override fun onCreateView(
@@ -78,15 +80,25 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateOrder()
+        view.btnCheckout.onClick {
+            val card = appPreference.card
+            if (card != null) {
+                Payment.getInstance(this@CheckoutFragment).purchase(card, appPreference.savedProduct)
+            } else {
+                val alert =
+                    alert(getString(R.string.add_payment_method_message), getString(R.string.no_payment_selected))
+                alert.okButton { loadPayment(activity as AppCompatActivity) }
+                alert.show()
+            }
+        }
     }
 
-    fun updateOrder() {
-        val appPreference = AppPreference.getInstance()
+    private fun updateOrder() {
         val savedUser = appPreference.savedUser
         val savedProduct = appPreference.savedProduct
         val upsellingProduct = appPreference.upSellingProduct
         var extra = 0.0
-        if(upsellingProduct != null)
+        if (upsellingProduct != null)
             extra = upsellingProduct.price
         val addressNotes = savedUser.addressNotes
         val orderDetails = getString(
@@ -118,58 +130,14 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
             tvFree.visibility = View.VISIBLE
         tvOrderSummery.text = orderDetails
     }
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        if (context is OnFragmentInteractionListener) {
-//            listener = context
-//        } else {
-//            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-//        }
-//    }
-//
-//    override fun onDetach() {
-//        super.onDetach()
-//        listener = null
-//    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
 
     companion object {
         /**
          * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
+         * this fragment
          * @return A new instance of fragment CheckoutFragmentFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CheckoutFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = CheckoutFragment()
     }
 }
