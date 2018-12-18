@@ -26,4 +26,7 @@
     <string name="data_updated">تم تحديث البيانات بنجاح</string>
     <string name="free_delivery">توصيل مجاني</string>
     <string name="upselling">منتج إضافي %1$s</string>
+    <string name="card_info">بيانات الدفع</string>
+    <string name="user_info">بيانات المستخدم</string>
+    <string name="update_card">تحديث طريقة الدفع</string>
 </resources>

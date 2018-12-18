@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".view.fragment.PaymentInfoFragment">
+    <LinearLayout android:layout_margin="8dp" android:orientation="vertical" android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+        <TextView
+                android:textColor="@color/colorSelectedItem"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/user_info"
+        />
+
+        <TextView
+                android:id="@+id/tvUserInfo"
+                android:textColor="@color/colorSelectedItem"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="@string/user_info"
+        />
+        <TextView
+                android:textColor="@color/colorSelectedItem"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/card_info"
+        />
+        <com.stripe.android.view.CardInputWidget
+                android:orientation="vertical"
+                android:id="@+id/card_input_widget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        />
+        <Button android:id="@+id/btnSaveCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fui_button_text_save"
+        />
+    </LinearLayout>
+</FrameLayout>

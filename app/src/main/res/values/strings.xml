@@ -26,4 +26,8 @@
     <string name="data_updated">Data updated successfully</string>
     <string name="free_delivery">Free Delivery</string>
     <string name="upselling">Up Selling Product %1$s</string>
+
+    <string name="card_info">Payment Info</string>
+    <string name="user_info">User Info</string>
+    <string name="update_card">Update Payment Method</string>
 </resources>

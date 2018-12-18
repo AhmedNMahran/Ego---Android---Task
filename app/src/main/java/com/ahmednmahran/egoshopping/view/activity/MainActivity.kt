@@ -1,5 +1,6 @@
 package com.ahmednmahran.egoshopping.view.activity
 
+import android.Manifest
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,11 @@ import java.util.*
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.util.Log
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 
 
@@ -20,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        signIn()
+    }
+
+    private fun signIn() {
         val auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
             // already signed in
@@ -36,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                             AuthUI.IdpConfig.EmailBuilder().build(),
                             AuthUI.IdpConfig.PhoneBuilder().build()
                         )
-                    ).setTosAndPrivacyPolicyUrls("https://google.com","https://facebook.com/kotlinegypt")
+                    ).setTosAndPrivacyPolicyUrls("https://google.com", "https://facebook.com/kotlinegypt")
                     .build(),
                 RC_SIGN_IN
             )
@@ -71,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun openHome(response: IdpResponse?) {
         var intent = Intent(this@MainActivity, HomeActivity::class.java)

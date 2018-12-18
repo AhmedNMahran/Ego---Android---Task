@@ -7,6 +7,7 @@ import com.ahmednmahran.egoshopping.model.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.stripe.android.model.Card;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -47,8 +48,25 @@ public class AppPreference {
         return this;
     }
 
-    public String getObjectString(Object object) {
-        return settings.getString(object.getClass().getSimpleName(), null);
+    public AppPreference saveCard(Card card) {
+        editor.putString("card", new Gson().toJson(card)).commit();
+        return this;
+    }
+    public Card getCard() {
+        String card = settings.getString("card", "");
+        Card savedCard = null;
+        if(!card.isEmpty()){
+            try{
+                savedCard = gson.fromJson(card,Card.class);
+            }catch (Exception e){
+                return savedCard;
+            }
+        }
+        return savedCard;
+    }
+
+    public String getObjectString(Class object) {
+        return settings.getString(object.getSimpleName(), null);
     }
 
     public User getSavedUser() {

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.ahmednmahran.egoshopping.R
 import com.ahmednmahran.egoshopping.view.fragment.CheckoutFragment
 import com.ahmednmahran.egoshopping.view.fragment.MapFragment
+import com.ahmednmahran.egoshopping.view.fragment.PaymentInfoFragment
 
 /**
  * Created by Ahmed Nabil on 12/17/18.
@@ -21,6 +22,11 @@ fun loadCheckout(activity: AppCompatActivity) {
     replaceFragment(activity, checkoutFragment,tag)
 }
 
+fun loadPayment(activity: AppCompatActivity) {
+    val paymentFragment = PaymentInfoFragment.newInstance()
+    val tag = "PaymentFragment"
+    replaceFragment(activity, paymentFragment,tag)
+}
 private fun replaceFragment(
     activity: AppCompatActivity,
     fragment: Fragment,
