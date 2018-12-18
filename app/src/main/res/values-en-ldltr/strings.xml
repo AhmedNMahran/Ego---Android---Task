@@ -17,4 +17,13 @@
     <string name="checkout">Checkout</string>
     <string name="delivery_fees">Delivery Fees</string>
     <string name="riyal">SR</string>
+    <string name="order_summery">User Details\n%1$s\nProduct Details\n%2$s\nGrand Total\n%3$s</string>
+    <string name="age">Age</string>
+    <string name="address">Address</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="delivery_date">Delivery Date</string>
+    <string name="data_updated">Data updated successfully</string>
+    <string name="free_delivery">Free Delivery</string>
+    <string name="upselling">Up Selling Product %1$s</string>
 </resources>

@@ -12,11 +12,15 @@ import com.ahmednmahran.egoshopping.R
 import com.ahmednmahran.egoshopping.model.App
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_upselling.view.*
+import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
-class UpSellingAdapter(val items: List<App>?, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
-    val imageFilePath = "file:///android_asset/images/"
-    // Gets the number of animals in the list
+class UpSellingAdapter(val items: List<App>?, val context: Context, val listener: OnAppSelectedListener) : RecyclerView.Adapter<ViewHolder>() {
+    private var selectedItem: Int? = null
+    private var selectedContainer: View? = null
+    private var selectedColor = 0
+    // Gets the number of items in the list
     override fun getItemCount(): Int {
         return items?.size!!
     }
@@ -26,7 +30,7 @@ class UpSellingAdapter(val items: List<App>?, val context: Context) : RecyclerVi
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_upselling, parent, false))
     }
 
-    // Binds each animal in the ArrayList to a view
+    // Binds each item in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val app = items?.get(position)
         holder.tvItemName?.text = app?.name
@@ -40,12 +44,47 @@ class UpSellingAdapter(val items: List<App>?, val context: Context) : RecyclerVi
             .placeholder(android.R.drawable.presence_away) // Place holder image
             .into(holder.imgItem)
 
+        if(selectedContainer == null){
+            deselectView(holder.itemContainer)
+        }else{
+            selectView(selectedContainer)
+        }
+        holder.itemContainer.onClick {
+            if (selectedContainer == null) {
+                selectedContainer = it
+                selectView(selectedContainer)
+                listener.onItemSelected(items?.get(position))
+            } else {
+                if (selectedContainer == it) {
+                    deselectView(selectedContainer)
+                    selectedContainer = null
+                    listener.onItemSelected(null)
+                }
+                else {
+                    deselectView(selectedContainer)
+                    selectedContainer = it
+                    selectView(selectedContainer)
+                    listener.onItemSelected(items?.get(position))
+                }
+            }
+        }
+    }
+
+    private fun selectView(view: View?){
+        view?.backgroundColor = context.resources.getColor(R.color.colorSelectedItem)
+    }
+    private fun deselectView(view: View?){
+        view?.backgroundColor  = context.resources.getColor(android.R.color.white)
+
     }
 }
-
 class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    // Holds the TextView that will add each animal to
     val tvItemName = view.tvItemName
     val tvItemPrice = view.tvItemPrice
     val imgItem = view.imgItem
+    val itemContainer = view.itemContainer
+}
+
+interface OnAppSelectedListener {
+    fun onItemSelected(app: App?)
 }

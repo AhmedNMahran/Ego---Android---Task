@@ -20,4 +20,13 @@
     <string name="checkout">تأكيد الطلب</string>
     <string name="delivery_fees">رسوم التوصيل</string>
     <string name="riyal">ريال</string>
+    <string name="order_summery">بيانات المستخدم\n%1$s\nتفاصيل المنتج\n%2$s\nالإجمالي\n%3$s</string>
+    <string name="age">العمر</string>
+    <string name="address">العنوان</string>
+    <string name="name">الاسم</string>
+    <string name="price">السعر</string>
+    <string name="delivery_date">ميعاد التوصيل</string>
+    <string name="data_updated">تم تحديث البيانات بنجاح</string>
+    <string name="free_delivery">توصيل مجاني</string>
+    <string name="upselling">منتج إضافي %1$s</string>
 </resources>

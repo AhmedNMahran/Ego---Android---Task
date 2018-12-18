@@ -57,26 +57,34 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
 
     private lateinit var datePicker: DatePickerFragment
     private lateinit var timePicker: TimePickerFragment
-    private var deliveryDate = Calendar.getInstance()
+    private lateinit var date: Date
     private lateinit var lastKnownLatLng: LatLng
     private var lastKnownLocation: Location? = Location("")
     private var resultReceiver: AddressResultReceiver? = null
-    private var requestingLocationUpdates: Boolean = false
-    private val REQUESTING_LOCATION_UPDATES_KEY = "request_updates"
     private var addressOutput = ""
     private lateinit var savedUser: User
     private lateinit var savedProduct: Product
     private lateinit var mMap: GoogleMap
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int){
-        deliveryDate.set(Calendar.HOUR_OF_DAY, hourOfDay)
-        deliveryDate.set(Calendar.MINUTE, minute)
-        deliveryDate.set(Calendar.SECOND, 0)
-        savedProduct.deliveryDate = deliveryDate
+        date.hours = hourOfDay
+        date.minutes = minute
+        savedProduct.deliveryDate = date
+        if(date.after(Date(2019,0,30,12,0)) && date.before(Date(2019,0,30,15,30))){
+            savedProduct.deliveryCost = 0.0
+        }
+        else
+            savedProduct.deliveryCost = 30.0
+        AppPreference.getInstance().saveProduct(savedProduct)
+        showSuccessUpdate()
+    }
+
+    private fun showSuccessUpdate() {
+        toast(getString(R.string.data_updated))
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        deliveryDate.set(year, month,day)
+        date = Date(year,month,day)
         timePicker.show(childFragmentManager,"timePicker")
     }
 
@@ -121,6 +129,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
         savedUser?.addressDescription = address
         savedUser?.geoLocation = latLng
         AppPreference.getInstance().updateUser(savedUser)
+        showSuccessUpdate()
 
     }
 
@@ -188,7 +197,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadMap()
-        btnUpdateAddress.onClick { AppPreference.getInstance().savedUser.addressDescription.plus("\n ${etDescription.text.toString()}") }
+        btnUpdateAddress.onClick {
+            AppPreference.getInstance().savedUser.addressNotes = "$${getString(R.string.address_description)}: ${etDescription.text}"
+            etDescription.text.clear()
+            showSuccessUpdate()
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

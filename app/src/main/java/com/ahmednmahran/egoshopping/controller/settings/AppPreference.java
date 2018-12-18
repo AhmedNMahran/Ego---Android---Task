@@ -3,9 +3,7 @@ package com.ahmednmahran.egoshopping.controller.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import com.ahmednmahran.egoshopping.model.Product;
-import com.ahmednmahran.egoshopping.model.Store;
-import com.ahmednmahran.egoshopping.model.User;
+import com.ahmednmahran.egoshopping.model.*;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -26,14 +24,15 @@ public class AppPreference {
     private final SharedPreferences settings;
     private final SharedPreferences.Editor editor;
     private Gson gson;
-    private AppPreference(){
+
+    private AppPreference() {
 
         settings = context.getSharedPreferences("appSettings", Context.MODE_PRIVATE);
         editor = settings.edit();
         gson = new Gson();
     }
 
-    public static void init(Context context){
+    public static void init(Context context) {
         AppPreference.context = context;
     }
 
@@ -43,97 +42,120 @@ public class AppPreference {
         return instance;
     }
 
-    public AppPreference save(Object object){
-        editor.putString(object.getClass().getSimpleName(),new Gson().toJson(object.toString())).commit();
+    public AppPreference save(Object object) {
+        editor.putString(object.getClass().getSimpleName(), new Gson().toJson(object.toString())).commit();
         return this;
     }
 
-    public String getObjectString(Object object){
-        return settings.getString(object.getClass().getSimpleName(),null);
+    public String getObjectString(Object object) {
+        return settings.getString(object.getClass().getSimpleName(), null);
     }
 
-    public User  getSavedUser(){
+    public User getSavedUser() {
         String savedUser = settings.getString("savedUser", "");
-        User user = new User("علي العلي",23.0,"",new LatLng(21.553279,39.166201 ));
-        if(!savedUser.isEmpty()){
-            try{
-                user = gson.fromJson(savedUser,User.class);
-            }catch (JsonSyntaxException e){
+        User user = new User("علي العلي", 23.0, "", new LatLng(21.553279, 39.166201), "");
+        if (!savedUser.isEmpty()) {
+            try {
+                user = gson.fromJson(savedUser, User.class);
+            } catch (JsonSyntaxException e) {
                 return user;
             }
         }
         return user;
     }
 
-    public Product getSavedProduct(){
+    public Product getSavedProduct() {
         String savedProduct = settings.getString("savedProduct", "");
-        Product product = new Product("المنتج العجيب",120,getSavedStore(),30,Calendar.getInstance());
-        if(!savedProduct.isEmpty()){
-            try{
-                product = gson.fromJson(savedProduct,Product.class);
-            }catch (JsonSyntaxException e){
+        Product product = new Product("المنتج العجيب", 120, getSavedStore(), 30, new Date());
+        if (!savedProduct.isEmpty()) {
+            try {
+                product = gson.fromJson(savedProduct, Product.class);
+            } catch (JsonSyntaxException e) {
                 return product;
             }
         }
         return product;
     }
 
-    public Store getSavedStore(){
+    public App getUpSellingProduct() {
+        String savedProduct = settings.getString("upSellingProduct", "");
+        App product = null;
+        if (!savedProduct.isEmpty()) {
+            try {
+                product = gson.fromJson(savedProduct, App.class);
+            } catch (JsonSyntaxException e) {
+                return product;
+            }
+        }
+        return product;
+    }
+
+    public AppPreference saveSelectedUpSelling(App product) {
+        String prodString = "";
+        if (product != null)
+            prodString = gson.toJson(product);
+        editor.putString("upSellingProduct", prodString).commit();
+        return this;
+    }
+
+    public Store getSavedStore() {
         String savedStore = settings.getString("savedStore", "");
-        Store store = new Store("أ ب ت المحدودة ","المملكة العربیة السعودیة 23326 السراي، الأندلس، جدة ","As Sairi, Al Andalus, Jeddah 23326, Saudi Arabia",new LatLng(21.553279,39.166201 ));
-        if(!savedStore.isEmpty()){
-            try{
-                store = gson.fromJson(savedStore,Store.class);
-            }catch (JsonSyntaxException e){
+        Store store = new Store("أ ب ت المحدودة ", "المملكة العربیة السعودیة 23326 السراي، الأندلس، جدة ", "As Sairi, Al Andalus, Jeddah 23326, Saudi Arabia", new LatLng(21.553279, 39.166201));
+        if (!savedStore.isEmpty()) {
+            try {
+                store = gson.fromJson(savedStore, Store.class);
+            } catch (JsonSyntaxException e) {
                 return store;
             }
         }
         return store;
     }
 
-    public AppPreference saveProduct(Product product){
-        editor.putString("savedProduct",gson.toJson(product));
+    public AppPreference saveProduct(Product product) {
+        editor.putString("savedProduct", gson.toJson(product)).commit();
         return this;
     }
 
-    public AppPreference updateUser(User user){
-        editor.putString("savedUser",gson.toJson(user));
-        return this;
-    }
-    public AppPreference saveStore(Store store){
-        editor.putString("savedStore",gson.toJson(store));
+    public AppPreference updateUser(User user) {
+        editor.putString("savedUser", gson.toJson(user)).commit();
         return this;
     }
 
-    public Locale getLocale(){
+    public AppPreference saveStore(Store store) {
+        editor.putString("savedStore", gson.toJson(store)).commit();
+        return this;
+    }
+
+    public Locale getLocale() {
         return new Locale(getLocaleLanguage());
     }
 
-    private String getLocaleLanguage(){
+    private String getLocaleLanguage() {
         return settings.getString("locale", AR);
     }
 
-    public AppPreference setLocale(String language){
-        editor.putString("locale",language);
+    public AppPreference setLocale(String language) {
+        editor.putString("locale", language).commit();
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
         context.getResources().updateConfiguration(config,
-               context.getResources().getDisplayMetrics());
+                context.getResources().getDisplayMetrics());
         return this;
     }
-    public AppPreference updateLocale(){
+
+    public AppPreference updateLocale() {
         setLocale(getLocaleLanguage());
         return this;
     }
 
-    public boolean isFirstRun(){
-        return settings.getBoolean("isFirstRun",true);
+    public boolean isFirstRun() {
+        return settings.getBoolean("isFirstRun", true);
     }
 
-    public AppPreference setAppLaunched(){
-        editor.putBoolean("isFirstRun",false).commit();
+    public AppPreference setAppLaunched() {
+        editor.putBoolean("isFirstRun", false).commit();
         return this;
     }
 

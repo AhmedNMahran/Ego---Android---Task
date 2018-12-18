@@ -5,50 +5,64 @@
              android:layout_height="match_parent"
              tools:context=".view.fragment.CheckoutFragment"
              >
-    <LinearLayout
-            android:layout_margin="8dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="1">
-        <FrameLayout
-                android:id="@+id/upSellingContainer"
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_margin="8dp"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.25"
-                >
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rvApps"
+                android:layout_height="match_parent"
+                android:weightSum="1">
+            <FrameLayout
+                    android:id="@+id/upSellingContainer"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    tools:listitem="@layout/item_upselling"
-                    android:layout_height="wrap_content" />
-        </FrameLayout>
-        <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.75">
-            <TextView
-                    android:id="@+id/tvOrderSummery"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.25"
+            >
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvApps"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        tools:listitem="@layout/item_upselling"
+                        android:layout_height="wrap_content" />
+            </FrameLayout>
+            <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    app:layout_constraintBottom_toTopOf="@+id/btnCheckout"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toTopOf="parent"/>
-            <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:id="@+id/btnCheckout"
-                    android:background="@color/colorAccent"
-                    android:textColor="@android:color/white"
-                    android:text="@string/checkout"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-        </android.support.constraint.ConstraintLayout>
-    </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="0.75">
+                <TextView
+                        android:id="@+id/tvOrderSummery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        app:layout_constraintBottom_toTopOf="@+id/btnCheckout"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:id="@+id/tvFree"
+                        android:background="@color/colorYellow"
+                        android:textColor="@android:color/white"
+                        android:text="@string/free_delivery"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toTopOf="@+id/btnCheckout"/>
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:id="@+id/btnCheckout"
+                        android:background="@color/colorAccent"
+                        android:textColor="@android:color/white"
+                        android:text="@string/checkout"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+            </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

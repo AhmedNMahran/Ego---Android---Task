@@ -9,12 +9,12 @@ import java.util.*
 /**
  * The user who uses the application to place orders
  */
-data class User(var name: String, var age: Double, var addressDescription: String="", var geoLocation: LatLng)
+data class User(var name: String, var age: Double, var addressDescription: String="", var geoLocation: LatLng,var addressNotes: String = "")
 
 /**
  * The item being selected by {@User}
  */
-data class Product(var name: String, var price: Double, var store: Store, var deliveryCost: Double, var deliveryDate: Calendar)
+data class Product(var name: String, var price: Double, var store: Store, var deliveryCost: Double, var deliveryDate: Date)
 
 /**
  * The Store from which the user buys the products
