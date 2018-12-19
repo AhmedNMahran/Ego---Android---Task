@@ -27,6 +27,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentServices") {
         const val RECEIVER = "$PACKAGE_NAME.RECEIVER"
         const val RESULT_DATA_KEY = "${PACKAGE_NAME}.RESULT_DATA_KEY"
         const val LOCATION_DATA_EXTRA = "${PACKAGE_NAME}.LOCATION_DATA_EXTRA"
+        const val CITY_KEY = "${PACKAGE_NAME}.CITY_KEY"
     }
     val TAG = FetchAddressIntentService::class.java.simpleName
 
@@ -65,7 +66,7 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentServices") {
                 errorMessage = getString(R.string.no_address_found)
                 Log.e(TAG, errorMessage)
             }
-            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage)
+            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage,"")
         } else {
             val address = addresses[0]
             // Fetch the address lines using getAddressLine,
@@ -76,10 +77,10 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentServices") {
             }
             Log.i(TAG, getString(R.string.address_found))
             if(!cityName.isNullOrBlank() && !cityName.contains(getString(R.string.cityName),true)){
-                deliverResultToReceiver(Constants.FAILURE_RESULT,getString(R.string.area_not_covered))
+                deliverResultToReceiver(Constants.FAILURE_RESULT,getString(R.string.area_not_covered),cityName)
             }else{
                 deliverResultToReceiver(Constants.SUCCESS_RESULT,
-                    addressFragments.joinToString(separator = "\n"))
+                    addressFragments.joinToString(separator = "\n"),cityName)
             }
         }
     }
@@ -87,8 +88,10 @@ class FetchAddressIntentService : IntentService("FetchAddressIntentServices") {
     /**
      * Return the address to the requester
      */
-    private fun deliverResultToReceiver(resultCode: Int, message: String) {
-        val bundle = Bundle().apply { putString(Constants.RESULT_DATA_KEY, message) }
+    private fun deliverResultToReceiver(resultCode: Int, message: String, city: String?) {
+        val bundle = Bundle().apply { putString(Constants.RESULT_DATA_KEY, message)
+            putString(Constants.CITY_KEY, city)
+        }
         receiver?.send(resultCode, bundle)
     }
 

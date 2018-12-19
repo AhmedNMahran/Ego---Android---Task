@@ -9,4 +9,8 @@
                 android:id="@+id/en"
                 android:title="@string/title_en"/>
     </group>
+    <item
+            android:id="@+id/signout"
+            android:title="@string/title_signout"/>
+
 </menu>

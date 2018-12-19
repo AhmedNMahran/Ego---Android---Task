@@ -36,7 +36,11 @@ import java.text.SimpleDateFormat
 class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppSelectedListener,
     Payment.PaymentCallback {
     override fun onPaymentSuccessful(message: String) {
-        NotificationManager.sendNotification(context!!,getString(R.string.payment_successful),getString(R.string.price)+": "+message+" "+getString(R.string.riyal))
+        NotificationManager.sendNotification(
+            context!!,
+            getString(R.string.payment_successful),
+            getString(R.string.price) + ": " + message + " " + getString(R.string.riyal)
+        )
     }
 
     override fun onPaymentFailure() {
@@ -51,7 +55,7 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
     }
 
     override fun onSuccess(returnedData: List<App>?) {
-        rvApps.adapter = UpSellingAdapter(returnedData, context!!, this)
+        rvApps?.adapter = UpSellingAdapter(returnedData, context!!, this)
     }
 
     override fun onFailure(message: String?) {
@@ -62,7 +66,7 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        simpleDateFormat = SimpleDateFormat("DD-MM-YY HH:MM a")
+        simpleDateFormat = SimpleDateFormat("dd-MM-yy HH:MM a")
         appPreference = AppPreference.getInstance()
     }
 
@@ -101,13 +105,17 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
         if (upsellingProduct != null)
             extra = upsellingProduct.price
         val addressNotes = savedUser.addressNotes
-        val orderDetails = getString(
+        val formattedDate = simpleDateFormat.format(savedProduct.deliveryDate)
+        val orderDetails = "\n\n"+getString(
             R.string.order_summery, """${getString(R.string.name)}: ${savedUser.name}
             ${getString(R.string.age)}: ${savedUser.age}
             ${getString(R.string.address)}: ${savedUser.addressDescription}
-            ${if (!addressNotes.isNullOrEmpty()) addressNotes else {
+            ${
+            if (!addressNotes.isNullOrEmpty()) addressNotes
+            else {
                 ""
-            }}
+            }
+            }
         """, """${getString(R.string.name)}: ${savedProduct.name}
             ${getString(R.string.price)}: ${savedProduct.price}
             ${getString(R.string.delivery_fees)}: ${savedProduct.deliveryCost}
@@ -121,8 +129,8 @@ class CheckoutFragment : Fragment(), Callback.NetworkCallback<List<App>>, OnAppS
                 ""
             }
             }
-            ${getString(R.string.delivery_date)}: ${simpleDateFormat.format(savedProduct.deliveryDate)}
-        """, "${savedProduct.price + savedProduct.deliveryCost + extra} "
+            ${getString(R.string.delivery_date)}: $formattedDate
+        """, "${savedProduct.price + savedProduct.deliveryCost + extra}\n\n\n "
         )
         if (savedProduct.deliveryCost > 0)
             tvFree.visibility = View.GONE

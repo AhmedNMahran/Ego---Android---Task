@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import android.os.Handler
 import android.support.annotation.Nullable
 import android.support.v7.app.AppCompatActivity
+import com.ahmednmahran.egoshopping.view.activity.HomeActivity
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -54,6 +55,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
     private lateinit var savedProduct: Product
     private lateinit var mMap: GoogleMap
 
+
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int){
         date.hours = hourOfDay
         date.minutes = minute
@@ -72,7 +74,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
     }
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-        date = Date(year,month,day)
+        date = Date()
+        date.year = year
+        date.month = month
+        date.date = day
         timePicker.show(childFragmentManager,"timePicker")
     }
 
@@ -80,6 +85,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
         // Display the address string
         // or an error message sent from the intent service.
         addressOutput = resultData?.getString(FetchAddressIntentService.Constants.RESULT_DATA_KEY) ?: ""
+        (activity as HomeActivity).cityName = resultData?.getString(FetchAddressIntentService.Constants.CITY_KEY) ?: ""
         updateUI(addressOutput)
         // Show a toast message if an address was found.
         if (resultCode == FetchAddressIntentService.Constants.SUCCESS_RESULT) {
@@ -179,10 +185,11 @@ class MapFragment : Fragment(), OnMapReadyCallback, AddressResultReceiver.Receiv
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadMap()
-        btnUpdateAddress.onClick {
-            AppPreference.getInstance().savedUser.addressNotes = "$${getString(R.string.address_description)}: ${etDescription.text}"
-            etDescription.text.clear()
+        view.btnUpdateAddress.onClick {
+            savedUser.addressNotes = "$${getString(R.string.address_description)}: ${etDescription.text}"
+            AppPreference.getInstance().updateUser(savedUser)
             showSuccessUpdate()
+            etDescription.text.clear()
         }
     }
 

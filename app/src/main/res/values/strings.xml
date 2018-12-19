@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Ego Shopping</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Payment</string>
     <string name="title_map">Map</string>
     <string name="title_checkout">Checkout</string>
     <string name="title_activity_maps">Map</string>
@@ -11,7 +11,8 @@
     <string name="address_found">Address found</string>
     <string name="no_geocoder_available">No geocoder available</string>
     <string name="cityName">Jeddah</string>
-    <string name="area_not_covered">Area not covered!</string>
+    <string name="area_not_covered">Area not covered!, delivery inside Jeddah only</string>
+    <string name="choose_address">Choose delivery address</string>
     <string name="address_description">Address description</string>
     <string name="update_address">Update Address</string>
     <string name="checkout">Checkout</string>
@@ -37,4 +38,6 @@
     <string name="channel_description" translatable="false">Get All App Notifications</string>
     <string name="title_ar" translatable="false">العربية</string>
     <string name="title_en" translatable="false">English</string>
+    <string name="title_signout">Sign out</string>
+    <string name="delivey_date_not_selected">Delivery date not selected</string>
 </resources>

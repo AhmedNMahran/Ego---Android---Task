@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">إيجو تسوق</string>
     <string name="title_activity_home">الشاشة الرئيسية</string>
-    <string name="title_home">الرئيسية</string>
+    <string name="title_home">الدفع</string>
     <string name="title_map">الخريطة</string>
     <string name="title_checkout">تأكيد الدفع</string>
     <string name="title_activity_maps">الخريطة</string>
@@ -11,7 +11,7 @@
     <string name="address_found">تم العثور على العنوان</string>
     <string name="no_geocoder_available">No geocoder available</string>
     <string name="cityName">جدة</string>
-    <string name="area_not_covered">المنطقة غير مغطاة!</string>
+    <string name="area_not_covered">المنطقة غير مغطاة!, التوصيل داخل جدة فقط</string>
     <string name="address_description">وصف العنوان</string>
     <string name="update_address">تحديث العنوان</string>
     <string name="checkout">تأكيد الطلب</string>
@@ -32,4 +32,7 @@
     <string name="payment_successful">تم الشراء بنجاح</string>
     <string name="add_payment_method_message">أضف طريقة دفع أولًا</string>
     <string name="no_payment_selected">لم تحدد طريقة الدفع</string>
+    <string name="title_signout">تسجيل الخروج</string>
+    <string name="choose_address">اختر عنوان التوصيل</string>
+    <string name="delivey_date_not_selected">لم تحدد تاريخ التوصيل</string>
 </resources>

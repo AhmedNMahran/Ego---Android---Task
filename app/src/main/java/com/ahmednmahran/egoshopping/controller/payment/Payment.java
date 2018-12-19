@@ -1,6 +1,7 @@
 package com.ahmednmahran.egoshopping.controller.payment;
 
 import com.ahmednmahran.egoshopping.controller.settings.AppPreference;
+import com.ahmednmahran.egoshopping.model.App;
 import com.ahmednmahran.egoshopping.model.Product;
 import com.stripe.android.model.Card;
 
@@ -28,7 +29,8 @@ private static Payment instance;
      * @param product
      */
     public Payment purchase(Card card, Product product){
-        callback.onPaymentSuccessful(product.getPrice()+AppPreference.getInstance().getUpSellingProduct().getPrice()+product.getDeliveryCost()+"");
+        App upSellingProduct = AppPreference.getInstance().getUpSellingProduct();
+        callback.onPaymentSuccessful(product.getPrice()+ (upSellingProduct!=null?upSellingProduct.getPrice():0)+product.getDeliveryCost()+"");
         return this;
     }
 
