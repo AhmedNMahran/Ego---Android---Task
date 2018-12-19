@@ -1,5 +1,6 @@
 package com.ahmednmahran.egoshopping.controller.settings;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -9,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.stripe.android.model.Card;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -43,30 +43,22 @@ public class AppPreference {
         return instance;
     }
 
-    public AppPreference save(Object object) {
-        editor.putString(object.getClass().getSimpleName(), new Gson().toJson(object.toString())).commit();
-        return this;
-    }
-
     public AppPreference saveCard(Card card) {
         editor.putString("card", new Gson().toJson(card)).commit();
         return this;
     }
+
     public Card getCard() {
         String card = settings.getString("card", "");
         Card savedCard = null;
-        if(!card.isEmpty()){
-            try{
-                savedCard = gson.fromJson(card,Card.class);
-            }catch (Exception e){
+        if (!card.isEmpty()) {
+            try {
+                savedCard = gson.fromJson(card, Card.class);
+            } catch (Exception e) {
                 return savedCard;
             }
         }
         return savedCard;
-    }
-
-    public String getObjectString(Class object) {
-        return settings.getString(object.getSimpleName(), null);
     }
 
     public User getSavedUser() {
@@ -148,9 +140,10 @@ public class AppPreference {
         return new Locale(getLocaleLanguage());
     }
 
-    private String getLocaleLanguage() {
+    public String getLocaleLanguage() {
         return settings.getString("locale", AR);
     }
+
 
     public AppPreference setLocale(String language) {
         editor.putString("locale", language).commit();
@@ -162,6 +155,21 @@ public class AppPreference {
                 context.getResources().getDisplayMetrics());
         return this;
     }
+
+    public void updateUIperLanguage(Activity activity) {
+
+        String languageToLoad;
+        if (getLocaleLanguage().toLowerCase().contains("en"))
+            languageToLoad = "en";
+        else languageToLoad = "ar";
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        activity.getBaseContext().getResources().updateConfiguration(config,
+                activity.getBaseContext().getResources().getDisplayMetrics());
+    }
+
 
     public AppPreference updateLocale() {
         setLocale(getLocaleLanguage());

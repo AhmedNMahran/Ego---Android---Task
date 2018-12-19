@@ -16,6 +16,7 @@ import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import com.ahmednmahran.egoshopping.controller.settings.AppPreference
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     val RC_SIGN_IN = 532
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppPreference.getInstance().updateUIperLanguage(this)
         setContentView(R.layout.activity_main)
         signIn()
     }

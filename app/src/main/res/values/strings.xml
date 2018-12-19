@@ -35,4 +35,6 @@
     <string name="no_payment_selected">No Payment Selected</string>
     <string name="channel_name" translatable="false">Ego Notification</string>
     <string name="channel_description" translatable="false">Get All App Notifications</string>
+    <string name="title_ar" translatable="false">العربية</string>
+    <string name="title_en" translatable="false">English</string>
 </resources>

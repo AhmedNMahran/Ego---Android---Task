@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+                android:checked="true"
+                android:id="@+id/ar"
+                android:title="@string/title_ar"/>
+        <item
+                android:id="@+id/en"
+                android:title="@string/title_en"/>
+    </group>
+</menu>
